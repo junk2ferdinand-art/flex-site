@@ -1,1 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ranked Flex — Multiplayer</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+  <div>
+    <div class="eyebrow">EVEVIUS · FAN-MADE</div>
+    <h1>RANKED FLEX</h1>
+    <p>Multiplayer draft application for Tower Battles</p>
+  </div>
+  <div id="conn" class="pill">Offline</div>
+</header>
 
+<main>
+<section id="landing" class="panel">
+  <h2>Create or join a match</h2>
+  <div class="grid two">
+    <div>
+      <label>Your name<input id="name" maxlength="24" value="Player 1"></label>
+      <label>Mode<select id="mode"><option value="1v1">Ranked Flex 1v1</option><option value="2v2">Ranked Flex 2v2</option></select></label>
+      <label>Draft<select id="draft"><option>Open</option><option>Close</option></select></label>
+      <button id="create">Create room</button>
+    </div>
+    <div>
+      <label>Room code<input id="code" maxlength="5" placeholder="ABCDE"></label>
+      <button class="secondary" id="join">Join room</button>
+      <div class="notice">This is a real-time prototype. Run the Node server and share its reachable address with the other players.</div>
+    </div>
+  </div>
+</section>
+
+<section id="app" hidden>
+  <div class="topbar">
+    <div><span class="muted">Room</span> <b id="roomCode"></b> <button class="tiny" id="copy">Copy code</button></div>
+    <div><span class="muted">Phase</span> <b id="phase"></b></div>
+    <div><span class="muted">Mode</span> <b id="modeLabel"></b></div>
+  </div>
+
+  <div id="lobby" class="panel">
+    <h2>Match setup</h2>
+    <div class="grid two">
+      <div>
+        <div id="players"></div>
+        <div class="actions">
+          <button id="coinflip">Run coinflip</button>
+          <button class="secondary" id="confirm">Confirm configuration</button>
+        </div>
+        <div id="teamChoice" hidden>
+          <p>Coinflip winner: choose your team.</p>
+          <button data-team="Blue">Choose Blue</button>
+          <button data-team="Red">Choose Red</button>
+        </div>
+      </div>
+      <div>
+        <h3>Ruling portfolio</h3>
+        <p class="muted">Pick exactly 3 rulings. Maximum 15 points. Duplicates are legal.</p>
+        <div id="rulings"></div>
+        <div class="portfolio"><b>Selected:</b> <span id="selectedRulings">None</span> · <b>Cost:</b> <span id="cost">0</span>/15</div>
+        <button id="lockRulings">Lock portfolio</button>
+      </div>
+    </div>
+  </div>
+
+  <section id="draftPanel" class="panel" hidden>
+    <div class="draftHeader">
+      <div>
+        <h2>Draft</h2>
+        <p id="turnText"></p>
+      </div>
+      <div class="badge" id="myTurn">Waiting</div>
+    </div>
+    <div class="grid two">
+      <div>
+        <h3>Tower pool</h3>
+        <p class="muted">Farm is mandatory and auto-included. Choose 4 free towers.</p>
+        <div id="towerGrid" class="towergrid"></div>
+      </div>
+      <div>
+        <h3>Current loadouts</h3>
+        <div id="loadouts"></div>
+        <h3>Match log</h3>
+        <div id="log" class="log"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="finish" class="panel" hidden>
+    <h2>Draft complete</h2>
+    <div id="finalLoadouts"></div>
+    <p>The application stops at the Ranked Flex draft layer. Start the actual Tower Battles match separately.</p>
+  </section>
+
+  <section id="chatPanel" class="panel" hidden>
+    <h2>Team chat</h2>
+    <div id="chat" class="chat"></div>
+    <div class="chatrow"><input id="chatInput" maxlength="300" placeholder="Message your teammate"><button id="sendChat">Send</button></div>
+  </section>
+</section>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>
