@@ -1,0 +1,9 @@
+{
+  "name": "ranked-flex-multiplayer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ranked Flex multiplayer draft server",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
